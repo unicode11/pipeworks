@@ -18,7 +18,7 @@ namespace pipeworks
     {
         public MainWindow()
         {
-            InitializeComponent();
         }
+
     }
 }
