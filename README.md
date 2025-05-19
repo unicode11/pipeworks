@@ -7,3 +7,4 @@ App to manage games/apps.
 * English, Russian localisations
 * Icons, covers for games.
 * Description, taken from the web.
+* Auto updating
