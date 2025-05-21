@@ -1,0 +1,35 @@
+﻿name: Build WPF App
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build project
+        run: dotnet build --configuration Release
+
+      - name: Publish (optional)
+        run: dotnet publish ./pipeworks/pipeworks.csproj --configuration Release --output ./publish
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: pipeworks-build
+          path: ./publish

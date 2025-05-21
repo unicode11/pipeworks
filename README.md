@@ -14,3 +14,4 @@ App to manage games/apps.
 ### Real To-do
 * DIsplayable name
 * Cleanup git
+* переместить ебучий скроллбар влево
