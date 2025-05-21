@@ -1,0 +1,40 @@
+﻿name: Release pipeworks # WE ARE SO BACK
+
+on:
+  push:
+    tags:
+      - 'v*'  # v0.0.0 релизнется, другого вида нихуя не релизнется
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+
+    steps:
+      - name: 🔄 Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 🛠 Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: 📦 Restore packages
+        run: dotnet restore ./pipeworks.csproj
+
+      - name: 🏗 Build project
+        run: dotnet build ./pipeworks.csproj --configuration Release --no-restore
+
+      - name: 🚀 Publish project
+        run: dotnet publish ./pipeworks.csproj --configuration Release --output ./publish --no-restore
+
+      - name: 📁 Archive release files
+        run: Compress-Archive -Path ./publish/* -DestinationPath pipeworks.zip
+
+      - name: 🚀 Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Release ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          files: pipeworks.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
