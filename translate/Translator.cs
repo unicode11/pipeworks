@@ -11,8 +11,8 @@ namespace pipeworks.translate
 {
     public class TranslateString
     {
-        public string? ToTranslate { get; set; }
-        public string? Translations { get; set; }
+        public string? TranslateKey { get; set; }
+        public string? Translate { get; set; }
     }
 
     internal class Translator

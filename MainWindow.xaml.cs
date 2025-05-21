@@ -30,7 +30,7 @@ namespace pipeworks
     {
         private string jsonPath;
         private string appDataPath;
-        private List<Game> games = new();
+        public List<Game> games = new();
         
         public MainWindow()
         {
@@ -42,6 +42,7 @@ namespace pipeworks
             
             InitializeComponent();
             LoadGames();
+            DataContext = this; // иди просто нахуй как ты работаешь я не понимаю блятьт
         }
 
         private void LoadGames()

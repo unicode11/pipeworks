@@ -6,12 +6,11 @@ App to manage games/apps.
 * Keep track of hours spent (not implemented)
 * English, Russian localisations (not implemented)
 * Icons for games. (not implemented)
-* Description, taken from the web. (not implemented)
-* Auto updating
-* Service bar for cool buttons
+* Description, taken from the web. (From Steam) (not implemented)
+* Auto updating (not implemented)
 * Browse local files
 
 ### Real To-do
-* DIsplayable name
+* Editing of instance
 * Cleanup git
 * переместить ебучий скроллбар влево
