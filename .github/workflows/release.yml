@@ -36,6 +36,5 @@ jobs:
           name: Release ${{ github.ref_name }}
           tag_name: ${{ github.ref_name }}
           files: pipeworks.zip
-          token: ${{ secrets.GH_PAT }} # changed from asd_2189sjcv89qjwdAknvy7j :troll:
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }} # changed from asd_2189sjcv89qjwdAknvy7j :troll:
