@@ -11,29 +11,28 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout repository
+      - name: 🧾 Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup .NET
+      - name: 🛠 Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore NuGet packages
-        run: dotnet restore pipeworks.sln
+      - name: 📦 Restore NuGet packages
+        run: dotnet restore ./pipeworks/pipeworks.csproj
 
-      - name: Build project
-        run: dotnet build pipeworks.sln --configuration Release --no-restore
+      - name: 🏗️ Build pipeworks (без WAP)
+        run: dotnet build ./pipeworks/pipeworks.csproj --configuration Release --no-restore
 
-      - name: Publish project
-        run: dotnet publish ./pipeworks/pipeworks.csproj --configuration Release --output ./publish
-
-#      - name: Upload artifact
-#        uses: actions/upload-artifact@v3.1.3 # я ненавижу гитхуй
+      - name: 🚀 Publish pipeworks
+        run: dotnet publish ./pipeworks/pipeworks.csproj --configuration Release --output ./publish --no-restore
+      
+#     - name: ⬆️ Upload artifact # ненавижу гитхуй
+#        uses: actions/upload-artifact@v3.1.3
 #        with:
 #          name: pipeworks-build
 #          path: ./publish
 
-      - name: List publish output
+      - name: 📂 Output files in ./publish
         run: dir ./publish
-
