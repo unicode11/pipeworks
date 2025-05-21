@@ -28,11 +28,11 @@ jobs:
       - name: Publish project
         run: dotnet publish ./pipeworks/pipeworks.csproj --configuration Release --output ./publish
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3.1.3 # я ненавижу гитхуй
-        with:
-          name: pipeworks-build
-          path: ./publish
+#      - name: Upload artifact
+#        uses: actions/upload-artifact@v3.1.3 # я ненавижу гитхуй
+#        with:
+#          name: pipeworks-build
+#          path: ./publish
 
       - name: List publish output
         run: dir ./publish
