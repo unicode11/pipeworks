@@ -6,6 +6,7 @@
         mc:Ignorable="d"
         Background="#1a2028"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:pipeworks.app"
         Title="pipeworks" Height="600" Width="649">
     <Window.Resources>
         <Style x:Key="ServiceButton" TargetType="Button">
@@ -49,8 +50,10 @@
                    Grid.Row="0" 
                    x:Name="ItemsListDocker"
                    
+                   
                    >
             <Grid x:Name="ItemsListGrid"
+                  
                   >
                 <Grid.RowDefinitions>
                     <RowDefinition x:Name="ServiceRow" Height="30" />
@@ -73,44 +76,66 @@
                     </ListBox.ItemsPanel>
 
                     <ListBoxItem><Button
+                        Name="ButtonPlus"
                         Style="{StaticResource ResourceKey=ServiceButton}"
-                        ToolTip="Add new item">
+                        ToolTip="Add new item"
+                        Click="AddGame">
                         <materialDesign:PackIcon Kind="Plus" Width="20" Height="20" Foreground="White"/>
                     </Button></ListBoxItem>
                     <ListBoxItem><Button
+                        Name="ButtonMinus"
                         Style="{StaticResource ResourceKey=ServiceButton}"
-                        ToolTip="Add new item">
+                        ToolTip="Add new item"
+                        Click="DeleteGame">
                         <materialDesign:PackIcon Kind="Minus" Width="20" Height="20" Foreground="White"/>
                     </Button></ListBoxItem>
                     <ListBoxItem><Button
+                        Name="ButtonReload"
                         Style="{StaticResource ResourceKey=ServiceButton}"
-                        ToolTip="Add new item">
+                        ToolTip="Add new item"
+                        Click="Refresh">
                         <materialDesign:PackIcon Kind="Reload" Width="20" Height="20" Foreground="White"/>
                     </Button></ListBoxItem>
                     <ListBoxItem><Button
+                        Name="ButtonNine"
                         Style="{StaticResource ResourceKey=ServiceButton}"
-                        ToolTip="Add new item">
-                        <materialDesign:PackIcon Kind="Brightness3" Width="20" Height="20" Foreground="White"/>
-                    </Button></ListBoxItem>
-                    <ListBoxItem><Button
-                        Style="{StaticResource ResourceKey=ServiceButton}"
-                        ToolTip="Add new item">
+                        ToolTip="Add new item"
+                        Click="SecretButton">
                         <materialDesign:PackIcon Kind="NumericNine" Width="20" Height="20" Foreground="White"/>
                     </Button></ListBoxItem>
                 </ListBox>
                 
-                <ListBox Grid.Row="1"
-                    Background="#FF364458"
-                    Foreground="AliceBlue"
-                >
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Vertical">
-                                
-                            </StackPanel>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                </ListBox>
+                <ScrollViewer Grid.Row="1" >
+                    <ListBox x:Name="GameList"
+                            Background="#374455"
+                            BorderThickness="0">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate DataType="{x:Type local:Game}">
+                                            <Border Margin="0 5" Padding="10"
+                                                    Background="#2a475e"
+                                                    CornerRadius="8"
+                                                    Effect="{DynamicResource Shadow}">
+                                                <DockPanel VerticalAlignment="Center">
+                                                    <Image Source="{Binding IconPath}"
+                                                           Width="48" Height="48"
+                                                           Margin="0,0,10,0"/>
+
+                                                    <StackPanel DockPanel.Dock="Left">
+                                                        <TextBlock Text="{Binding Name}"
+                                                                   FontSize="16"
+                                                                   FontWeight="Bold"
+                                                                   Foreground="White"/>
+                                                        <TextBlock Text="{Binding Playtime}"
+                                                                   FontSize="12"
+                                                                   Foreground="#c7d5e0"
+                                                                   Margin="0,4,0,0"/>
+                                                    </StackPanel>
+                                                </DockPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
                 
             </Grid>
 
