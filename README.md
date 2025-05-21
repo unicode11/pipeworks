@@ -8,3 +8,4 @@ App to manage games/apps.
 * Icons, covers for games.
 * Description, taken from the web.
 * Auto updating
+* Service bar for cool buttons

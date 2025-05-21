@@ -8,4 +8,16 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="resources\minus.png" />
+    <None Remove="resources\nine.png" />
+    <None Remove="resources\plus.png" />
+    <None Remove="resources\relaod.png" />
+    <None Remove="resources\Безымянный-1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="5.2.2-ci998" />
+  </ItemGroup>
+
 </Project>

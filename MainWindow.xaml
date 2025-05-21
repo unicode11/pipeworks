@@ -5,8 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Background="#1a2028"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="pipeworks" Height="600" Width="649">
-    <Grid x:Name="MainGrid" Margin="0">
+    <Window.Resources>
+        <Style x:Key="ServiceButton" TargetType="Button">
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="ToolTipService.ShowDuration" Value="3000"/>
+            <Setter Property="Background" Value="#2a3657"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <!-- ресурсы говно закончились стак алмазов отдай -->
+    
+    
+    <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -19,14 +47,73 @@
                 
         <DockPanel Grid.Column="0" 
                    Grid.Row="0" 
-                   x:Name="ItemsListDocker" 
-                   Background="#FF364458" >
-
-            <ListBox
-                Background="#FF364458"
+                   x:Name="ItemsListDocker"
+                   
+                   >
+            <Grid x:Name="ItemsListGrid"
+                  >
+                <Grid.RowDefinitions>
+                    <RowDefinition x:Name="ServiceRow" Height="30" />
+                    <RowDefinition x:Name="ItemsListRow" Height="*" />
+                </Grid.RowDefinitions>
                 
+                <ListBox Grid.Row="0"
+                    Background="#354457"
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                    ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                    >
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel 
+                                Orientation="Horizontal" 
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                ></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+
+                    <ListBoxItem><Button
+                        Style="{StaticResource ResourceKey=ServiceButton}"
+                        ToolTip="Add new item">
+                        <materialDesign:PackIcon Kind="Plus" Width="20" Height="20" Foreground="White"/>
+                    </Button></ListBoxItem>
+                    <ListBoxItem><Button
+                        Style="{StaticResource ResourceKey=ServiceButton}"
+                        ToolTip="Add new item">
+                        <materialDesign:PackIcon Kind="Minus" Width="20" Height="20" Foreground="White"/>
+                    </Button></ListBoxItem>
+                    <ListBoxItem><Button
+                        Style="{StaticResource ResourceKey=ServiceButton}"
+                        ToolTip="Add new item">
+                        <materialDesign:PackIcon Kind="Reload" Width="20" Height="20" Foreground="White"/>
+                    </Button></ListBoxItem>
+                    <ListBoxItem><Button
+                        Style="{StaticResource ResourceKey=ServiceButton}"
+                        ToolTip="Add new item">
+                        <materialDesign:PackIcon Kind="Brightness3" Width="20" Height="20" Foreground="White"/>
+                    </Button></ListBoxItem>
+                    <ListBoxItem><Button
+                        Style="{StaticResource ResourceKey=ServiceButton}"
+                        ToolTip="Add new item">
+                        <materialDesign:PackIcon Kind="NumericNine" Width="20" Height="20" Foreground="White"/>
+                    </Button></ListBoxItem>
+                </ListBox>
+                
+                <ListBox Grid.Row="1"
+                    Background="#FF364458"
+                    Foreground="AliceBlue"
                 >
-            </ListBox>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical">
+                                
+                            </StackPanel>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+                
+            </Grid>
+
             
         </DockPanel>
 
