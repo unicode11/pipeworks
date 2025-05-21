@@ -109,31 +109,34 @@
                     <ListBox x:Name="GameList"
                             Background="#374455"
                             BorderThickness="0">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate DataType="{x:Type local:Game}">
-                                            <Border Margin="0 5" Padding="10"
-                                                    Background="#2a475e"
-                                                    CornerRadius="8"
-                                                    Effect="{DynamicResource Shadow}">
-                                                <DockPanel VerticalAlignment="Center">
-                                                    <Image Source="{Binding IconPath}"
-                                                           Width="48" Height="48"
-                                                           Margin="0,0,10,0"/>
-
-                                                    <StackPanel DockPanel.Dock="Left">
-                                                        <TextBlock Text="{Binding Name}"
-                                                                   FontSize="16"
-                                                                   FontWeight="Bold"
-                                                                   Foreground="White"/>
-                                                        <TextBlock Text="{Binding Playtime}"
-                                                                   FontSize="12"
-                                                                   Foreground="#c7d5e0"
-                                                                   Margin="0,4,0,0"/>
-                                                    </StackPanel>
-                                                </DockPanel>
-                                            </Border>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:Game}">
+                                <Border Margin="0 5" Padding="10"
+                                        Background="#2a475e"
+                                        CornerRadius="8"
+                                        Effect="{DynamicResource Shadow}">
+                                    <DockPanel VerticalAlignment="Center">
+                                        <Image Source="{Binding Icon}"
+                                               Width="Auto" Height="24"
+                                               Margin="0,0,10,0"/>
+                                                <StackPanel DockPanel.Dock="Left">
+                                                    <TextBlock Text="{Binding Name}"
+                                                               FontSize="16"
+                                                               FontWeight="Bold"
+                                                               Foreground="White"/>
+                                                    <TextBlock Text="{Binding DisplayName}"
+                                                               FontSize="12"
+                                                               Foreground="#c7d5e0"
+                                                               Margin="0,4,0,0"/>
+                                                    <TextBlock Text="{Binding Playtime}"
+                                                               FontSize="12"
+                                                               Foreground="#c7d5e0"
+                                                               Margin="0,4,0,0"/>
+                                                </StackPanel>
+                                    </DockPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
                 </ScrollViewer>
                 

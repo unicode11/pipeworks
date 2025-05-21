@@ -17,6 +17,9 @@ namespace pipeworks.translate
 
     internal class Translator
     {
-        // тут пусто :#
+        public void Main()
+        {
+            // тут пусто :#
+        }
     }
 }

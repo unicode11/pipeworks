@@ -6,12 +6,18 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Drawing.Imaging;
 using System.Windows.Media.Imaging;
+using System.Windows.Interop;
+using System.Drawing;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Text.Json;
+using System.Windows.Interop;
 using Microsoft.Win32;
 using pipeworks.app;
+using IWshRuntimeLibrary;
+using File = System.IO.File;
 using Path = System.IO.Path;
 
 namespace pipeworks
@@ -47,34 +53,86 @@ namespace pipeworks
             else
             {
                 games = new List<Game>();
-                SaveGames(); // ой блять какая же хуйня этот ваш c#
+                SaveGames();
             }
             
             GameList.ItemsSource = null;
             GameList.ItemsSource = games;
         }
 
+        // private string ResolveShortCut(string shortcutPath) // тупые блять микрософты вы не могли сделать так, чтобы оно сразу возвращало путь к оригиналу нахуя мне эту функцию делать
+        // {
+        //     if (!File.Exists(shortcutPath) || Path.GetExtension(shortcutPath).ToLower() != ".lnk")
+        //         return shortcutPath;
+        //
+        //     Type shellType = Type.GetTypeFromProgID("WScript.Shell");
+        //     dynamic shell = Activator.CreateInstance(shellType);
+        //     dynamic shortcut = shell.CreateShortcut(shortcutPath);
+        //
+        //     return shortcut.TargetPath;
+        // }
+
+        private ImageSource GetIcon(string path)
+        {
+            try
+            {
+                string exePath = path;
+
+                if (Path.GetExtension(path).ToLower() == ".lnk")
+                {
+                    var shell = new WshShell();
+                    var shortcut = (IWshShortcut)shell.CreateShortcut(path);
+                    exePath = shortcut.TargetPath;
+                }
+
+                var icon = System.Drawing.Icon.ExtractAssociatedIcon(exePath);
+                if (icon != null)
+                {
+                    using (var bmp = icon.ToBitmap())
+                    {
+                        var stream = new MemoryStream();
+                        bmp.Save(stream, ImageFormat.Png);
+                        stream.Seek(0, SeekOrigin.Begin);
+
+                        var decoder = new PngBitmapDecoder(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
+                        return decoder.Frames[0];
+                    }
+                }
+            }
+            catch { }
+
+            return null;
+        }
+        
         private void SaveGames()
         {
             var json = JsonSerializer.Serialize(games, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(jsonPath, json);
         }
-        
-
-
         private void SecretButton(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            MessageBox.Show("ᗜ˰ᗜ", "ᗜ˰ᗜ");
         }
 
         private void Refresh(object sender, RoutedEventArgs e)
         {
+            Reload();
+        }
+
+        private void Reload()
+        {
+            SaveGames();
             LoadGames();
         }
 
         private void DeleteGame(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (GameList.SelectedItem == null) return;
+            if (GameList.SelectedItem is Game game)
+            {
+                games.Remove(game);
+                Reload();
+            }
         }
 
         private void AddGame(object sender, RoutedEventArgs e)
@@ -85,22 +143,31 @@ namespace pipeworks
                 Filter = "Executable files (*.exe)|*.exe|All files (*.*)|*.*"
             };
 
-            if (!(bool)openFileDialog.ShowDialog()) return; 
-            
-            var filePath = openFileDialog.FileName;
-            var fileName = Path.GetFileNameWithoutExtension(filePath);
-
-            var newGame = new Game
+            if (openFileDialog.ShowDialog() == true)
             {
-                Name = fileName,
-                IconPath = "Assets/default_icon.png", // пока похуй
-                ExecutablePath = filePath,
-                Playtime = "0 ч."
-            };
 
-            games.Add(newGame);
-            SaveGames();
-            LoadGames();
+                var filePath = openFileDialog.FileName;
+                if (games.Any(g => g.ExecutablePath == filePath))
+                {
+                    MessageBox.Show("Уже есть такое, пропускаю.", "Дубликат");
+                    return;
+                }
+
+                var fileName = Path.GetFileNameWithoutExtension(filePath);
+
+                var newGame = new Game
+                {
+                    Name = fileName,
+                    DisplayName = "penis",
+                    ExecutablePath = filePath,
+                    Playtime = "0 ч.",
+                    Icon = GetIcon(filePath)
+                };
+
+                games.Add(newGame);
+                SaveGames();
+                LoadGames();
+            }
         }
     }
 }
