@@ -20,13 +20,13 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: 📦 Restore NuGet packages
-        run: dotnet restore ./pipeworks/pipeworks.csproj
+        run: dotnet restore ./pipeworks.csproj
 
       - name: 🏗️ Build pipeworks (без WAP)
-        run: dotnet build ./pipeworks/pipeworks.csproj --configuration Release --no-restore
+        run: dotnet build ./pipeworks.csproj --configuration Release --no-restore
 
       - name: 🚀 Publish pipeworks
-        run: dotnet publish ./pipeworks/pipeworks.csproj --configuration Release --output ./publish --no-restore
+        run: dotnet publish ./pipeworks.csproj --configuration Release --output ./publish --no-restore
       
 #     - name: ⬆️ Upload artifact # ненавижу гитхуй
 #        uses: actions/upload-artifact@v3.1.3
