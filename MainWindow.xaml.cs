@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -143,31 +144,46 @@ namespace pipeworks
                 Filter = "Executable files (*.exe)|*.exe|All files (*.*)|*.*"
             };
 
-            if (openFileDialog.ShowDialog() == true)
+            if (openFileDialog.ShowDialog()==false) return;
+            
+            var filePath = openFileDialog.FileName;
+            if (games.Any(g => g.ExecutablePath == filePath))
             {
-
-                var filePath = openFileDialog.FileName;
-                if (games.Any(g => g.ExecutablePath == filePath))
-                {
-                    MessageBox.Show("Уже есть такое, пропускаю.", "Дубликат");
-                    return;
-                }
-
-                var fileName = Path.GetFileNameWithoutExtension(filePath);
-
-                var newGame = new Game
-                {
-                    Name = fileName,
-                    DisplayName = "penis",
-                    ExecutablePath = filePath,
-                    Playtime = "0 ч.",
-                    Icon = GetIcon(filePath)
-                };
-
-                games.Add(newGame);
-                SaveGames();
-                LoadGames();
+                MessageBox.Show("Уже есть такое, пропускаю.", "Дубликат");
+                return;
             }
+
+            var fileName = Path.GetFileNameWithoutExtension(filePath);
+            string name = fileName; // на случай если нет названия
+            var versionInfo = FileVersionInfo.GetVersionInfo(filePath);
+            Console.WriteLine(versionInfo.FileDescription);
+            if (!string.IsNullOrWhiteSpace(versionInfo.FileDescription)) 
+                name = versionInfo.FileDescription;
+            else if (name == fileName)
+                name = "";
+            
+            var newGame = new Game
+            {
+                Name = fileName,
+                DisplayName = name,
+                ExecutablePath = filePath,
+                Playtime = "0 ч.",
+                Icon = GetIcon(filePath)
+            };
+
+            games.Add(newGame);
+            SaveGames();
+            LoadGames();
+        }
+
+        private void PlayGame(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void BrowseFiles(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

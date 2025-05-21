@@ -9,6 +9,6 @@ public class Game
     public string DisplayName { get; set; } 
     public string Playtime { get; set; } = "0 ч.";
     public string ExecutablePath { get; set; }
-    [JsonIgnore] // иконку незя впихуять в жсон, игнорим
+    [JsonIgnore] // игнорим иначе будет ошибки идите наху
     public ImageSource Icon { get; set; }
 }
