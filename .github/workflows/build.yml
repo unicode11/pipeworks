@@ -33,3 +33,7 @@ jobs:
         with:
           name: pipeworks-build
           path: ./publish
+
+      - name: List publish output
+        run: dir ./publish
+
