@@ -1,4 +1,4 @@
-﻿name: Build WPF App
+﻿name: Build pipeworks
 
 on:
   push:
@@ -19,16 +19,16 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore dependencies
-        run: dotnet restore
+      - name: Restore NuGet packages
+        run: dotnet restore pipeworks.sln
 
       - name: Build project
-        run: dotnet build --configuration Release
+        run: dotnet build pipeworks.sln --configuration Release --no-restore
 
-      - name: Publish (optional)
+      - name: Publish project
         run: dotnet publish ./pipeworks/pipeworks.csproj --configuration Release --output ./publish
 
-      - name: Upload Artifacts
+      - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: pipeworks-build
