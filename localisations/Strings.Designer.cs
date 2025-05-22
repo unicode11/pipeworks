@@ -139,5 +139,11 @@ namespace pipeworks {
                 return ResourceManager.GetString("Steam", resourceCulture);
             }
         }
+        
+        public static string Json {
+            get {
+                return ResourceManager.GetString("Json", resourceCulture);
+            }
+        }
     }
 }

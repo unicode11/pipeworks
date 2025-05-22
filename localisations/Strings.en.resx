@@ -45,4 +45,7 @@
     <data name="Steam" xml:space="preserve">
         <value>Load description from Steam (It doesn't always work)</value>
     </data>
+    <data name="Json" xml:space="preserve">
+        <value>View .json (settings) of app</value>
+    </data>
 </root>

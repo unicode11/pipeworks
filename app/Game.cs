@@ -9,7 +9,8 @@ public class Game
     public string DisplayName { get; set; } = "No display name!";
     public string Playtime { get; set; } = "0";
     public string ExecutablePath { get; set; } = "No executable path!";
-    public string JsonPath { get; set; } = "No json path!";
+    public string JsonPath { get; set; } = "No json path!"; // todo
+    
     // [JsonIgnore] // игнорим иначе будет ошибки идите наху
     // public ImageSource Icon { get; set; }
 }

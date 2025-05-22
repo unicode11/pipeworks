@@ -12,20 +12,20 @@
     <Window.Resources>
         <!-- common button -->
         <Style x:Key="ServiceButton" TargetType="Button">
-            <Setter Property="Width" Value="20"/>
-            <Setter Property="Height" Value="20"/>
-            <Setter Property="ToolTipService.ShowDuration" Value="3000"/>
-            <Setter Property="Background" Value="#2a3657"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Width" Value="20" />
+            <Setter Property="Height" Value="20" />
+            <Setter Property="ToolTipService.ShowDuration" Value="3000" />
+            <Setter Property="Background" Value="#2a3657" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}"
                                 CornerRadius="4">
                             <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"/>
+                                              VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -35,21 +35,21 @@
 
     </Window.Resources>
     <!-- ресурсы говно закончились стак алмазов отдай -->
-    
+
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="ItemsListColumn" Width="250"/>
-            <ColumnDefinition Width="494*"/>
+            <ColumnDefinition x:Name="ItemsListColumn" Width="250" />
+            <ColumnDefinition Width="494*" />
         </Grid.ColumnDefinitions>
 
-        
+
         <!-- ВСЯ ЭТА ХУЙНЯ - ЛЕВО -->
-        
-        
+
+
         <DockPanel x:Name="ItemsListDocker"
                    Grid.Column="0">
             <Grid x:Name="ItemsListGrid">
@@ -57,85 +57,89 @@
                     <RowDefinition x:Name="ServiceRow" Height="30" />
                     <RowDefinition x:Name="ItemsListRow" Height="*" />
                 </Grid.RowDefinitions>
-                
+
                 <ListBox Grid.Row="0"
-                    Background="#354457"
-                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                    ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                    >
+                         Background="#354457"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ScrollViewer.VerticalScrollBarVisibility="Disabled">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel 
-                                Orientation="Horizontal" 
+                            <StackPanel
+                                Orientation="Horizontal"
                                 HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                ></StackPanel>
+                                VerticalAlignment="Center" />
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
 
-                    <ListBoxItem><Button
-                        Name="ButtonPlus"
-                        Style="{StaticResource ResourceKey=ServiceButton}"
-                        ToolTip="{x:Static pipeworks:Strings.AddButton }"
-                        Click="AddGame">
-                        <materialDesign:PackIcon Kind="Plus" Width="20" Height="20" Foreground="White"/>
-                    </Button></ListBoxItem>
-                    <ListBoxItem><Button
-                        Name="ButtonMinus"
-                        Style="{StaticResource ResourceKey=ServiceButton}"
-                        ToolTip="{x:Static pipeworks:Strings.DeleteButton}"
-                        Click="DeleteGame">
-                        <materialDesign:PackIcon Kind="Minus" Width="20" Height="20" Foreground="White"/>
-                    </Button></ListBoxItem>
-                    <ListBoxItem><Button
-                        Name="ButtonReload"
-                        Style="{StaticResource ResourceKey=ServiceButton}"
-                        ToolTip="{x:Static pipeworks:Strings.ReloadButton}"
-                        Click="Refresh">
-                        <materialDesign:PackIcon Kind="Reload" Width="20" Height="20" Foreground="White"/>
-                    </Button></ListBoxItem>
-                    <ListBoxItem><Button
-                        Name="ButtonNine"
-                        Style="{StaticResource ResourceKey=ServiceButton}"
-                        ToolTip="ᗜ˰ᗜ"
-                        Click="SecretButton">
-                        <materialDesign:PackIcon Kind="NumericNine" Width="20" Height="20" Foreground="White"/>
-                    </Button></ListBoxItem>
-                    <ListBoxItem><Button
-                        Name="ButtonLangugage"
-                        Style="{StaticResource ResourceKey=ServiceButton}"
-                        ToolTip="Changes language/Смена языка"
-                        Click="ChangeLanguage">
-                        <materialDesign:PackIcon Kind="SpokenLanguage" Width="20" Height="20" Foreground="White"/>
-                    </Button></ListBoxItem>
+                    <ListBoxItem>
+                        <Button
+                            Name="ButtonPlus"
+                            Style="{StaticResource ResourceKey=ServiceButton}"
+                            ToolTip="{x:Static pipeworks:Strings.AddButton }"
+                            Click="AddGame">
+                            <materialDesign:PackIcon Kind="Plus" Width="20" Height="20" Foreground="White" />
+                        </Button>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <Button
+                            Name="ButtonMinus"
+                            Style="{StaticResource ResourceKey=ServiceButton}"
+                            ToolTip="{x:Static pipeworks:Strings.DeleteButton}"
+                            Click="DeleteGame">
+                            <materialDesign:PackIcon Kind="Minus" Width="20" Height="20" Foreground="White" />
+                        </Button>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <Button
+                            Name="ButtonReload"
+                            Style="{StaticResource ResourceKey=ServiceButton}"
+                            ToolTip="{x:Static pipeworks:Strings.ReloadButton}"
+                            Click="Refresh">
+                            <materialDesign:PackIcon Kind="Reload" Width="20" Height="20" Foreground="White" />
+                        </Button>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <Button
+                            Name="ButtonNine"
+                            Style="{StaticResource ResourceKey=ServiceButton}"
+                            ToolTip="ᗜ˰ᗜ"
+                            Click="SecretButton">
+                            <materialDesign:PackIcon Kind="NumericNine" Width="20" Height="20" Foreground="White" />
+                        </Button>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <Button
+                            Name="ButtonLangugage"
+                            Style="{StaticResource ResourceKey=ServiceButton}"
+                            ToolTip="Changes language/Смена языка"
+                            Click="ChangeLanguage">
+                            <materialDesign:PackIcon Kind="SpokenLanguage" Width="20" Height="20" Foreground="White" />
+                        </Button>
+                    </ListBoxItem>
                 </ListBox>
-                
-                <ScrollViewer Grid.Row="1" >
-                    <ListBox 
+
+                <ScrollViewer Grid.Row="1">
+                    <ListBox
                         x:Name="GameList"
                         Background="#374455"
                         BorderThickness="0"
                         MouseDoubleClick="GameClicked">
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="{x:Type local:Game}">
-                                <Border Margin="0 5" Padding="10"
+                                <Border Margin="0 0" Padding="19"
                                         Background="#171e30"
                                         CornerRadius="5"
                                         Effect="{DynamicResource Shadow}">
                                     <DockPanel VerticalAlignment="Center">
                                         <StackPanel>
                                             <TextBlock Text="{Binding Name}"
-                                                       FontSize="16"
+                                                       FontSize="12"
                                                        FontWeight="Bold"
-                                                       Foreground="White"/>
+                                                       Foreground="White" />
                                             <TextBlock Text="{Binding Name, Mode=TwoWay}"
-                                                       FontSize="12"
+                                                       FontSize="8"
                                                        Foreground="#c7d5e0"
-                                                       Margin="0,4,0,0"/>
-                                            <TextBlock Text="{Binding Playtime, Mode=TwoWay}"
-                                                       FontSize="12"
-                                                       Foreground="#c7d5e0"
-                                                       Margin="0,4,0,0"/>
+                                                       Margin="0,4,0,0" />
                                         </StackPanel>
                                     </DockPanel>
                                 </Border>
@@ -145,135 +149,134 @@
                 </ScrollViewer>
             </Grid>
         </DockPanel>
-        
+
         <!-- ВСЯ ЭТА ХУЙНЯ - ПРАВО -->
         <Grid x:Name="RightGrid" Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="155"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="155" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            
+
             <DockPanel Grid.Row="0" Background="#1d232b">
                 <StackPanel VerticalAlignment="Bottom"
                             Orientation="Horizontal"
-                            Background="#212832" 
-                            Height="30">
-                            <ListBoxItem VerticalAlignment="Center">
-                                <Button
-                                Name="PlayButton"
-                                Style="{StaticResource ResourceKey=ServiceButton}"
-                                Width="150"
-                                ToolTip="{x:Static pipeworks:Strings.PlayApp}"
-                                Click="PlayGame">
-                                <materialDesign:PackIcon Kind="Play" Width="20" Height="20" Foreground="White"/>
-                            </Button>
-                            </ListBoxItem>    
-                            <ListBoxItem VerticalAlignment="Center">
-                                <Button
-                                Name="BrowseLocalFiles"
-                                Style="{StaticResource ResourceKey=ServiceButton}"
-                                ToolTip="{x:Static pipeworks:Strings.BrowseApp}"
-                                Click="BrowseFiles">
-                                <materialDesign:PackIcon Kind="Folder" Width="20" Height="20" Foreground="White"/>
-                            </Button>
-                            </ListBoxItem>
-                            <ListBoxItem VerticalAlignment="Center">
-                                <Button
-                                Name="EditButton"
-                                Style="{StaticResource ResourceKey=ServiceButton}"
-                                ToolTip="{x:Static pipeworks:Strings.EditApp}"
-                                Click="EditInstance">
-                                <materialDesign:PackIcon Kind="Pencil" Width="20" Height="20" Foreground="White"/>
-                            </Button>
-                            </ListBoxItem>
-                            <ListBoxItem VerticalAlignment="Center">
-                                <Button
-                                    Name="SteamButton"
-                                    Style="{StaticResource ResourceKey=ServiceButton}"
-                                    ToolTip="{x:Static pipeworks:Strings.Steam}"
-                                    Click="GetDescription">
-                                    <materialDesign:PackIcon Kind="Steam" Width="20" Height="20" Foreground="White"/>
-                                </Button>
-                            </ListBoxItem>
-                            <ListBoxItem VerticalAlignment="Center">
-                                <Border
-                                    Background="#2b3558"
-                                    Width="45"
-                                    Height="20"
-                                    CornerRadius="4">
-                                    <TextBlock
-                                        VerticalAlignment="Center"
-                                        TextAlignment="Center"
-                                        FontWeight="Bold"
-                                        FontFamily="Arial"
-                                        Foreground="#ffffff"
-                                        Name="HoursSpent"
-                                        Text="0">
-                                    </TextBlock>
-                                </Border>
-                            </ListBoxItem>  
-                        </StackPanel>
-                    </DockPanel>
-                    
-                    <DockPanel Grid.Row="1" Background="#415063">
-                        <Border
-                            DockPanel.Dock="Top"
                             Background="#212832"
-                            CornerRadius="10"
-                            Margin="5,10,5,5"
-                            Padding="10,5,10,10"
-                            VerticalAlignment="Top"
-                            HorizontalAlignment="Center"
-                        >
-                            <TextBlock
-                                x:Name="RightTitle"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                FontSize="32"
-                                FontFamily="Comic Sans MS"
-                                Foreground="#FFFFFF"
-                            >
-                            </TextBlock>
-                        </Border>
+                            Height="30">
+                    <ListBoxItem VerticalAlignment="Center">
+                        <Button
+                            Name="PlayButton"
+                            Style="{StaticResource ResourceKey=ServiceButton}"
+                            Width="150"
+                            ToolTip="{x:Static pipeworks:Strings.PlayApp}"
+                            Click="PlayGame">
+                            <materialDesign:PackIcon Kind="Play" Width="20" Height="20" Foreground="White" />
+                        </Button>
+                    </ListBoxItem>
+                    <ListBoxItem VerticalAlignment="Center">
+                        <Button
+                            Name="BrowseLocalFiles"
+                            Style="{StaticResource ResourceKey=ServiceButton}"
+                            ToolTip="{x:Static pipeworks:Strings.BrowseApp}"
+                            Click="BrowseFiles">
+                            <materialDesign:PackIcon Kind="Folder" Width="20" Height="20" Foreground="White" />
+                        </Button>
+                    </ListBoxItem>
+                    <ListBoxItem VerticalAlignment="Center">
+                        <Button
+                            Name="EditButton"
+                            Style="{StaticResource ResourceKey=ServiceButton}"
+                            ToolTip="{x:Static pipeworks:Strings.EditApp}"
+                            Click="EditInstance">
+                            <materialDesign:PackIcon Kind="Pencil" Width="20" Height="20" Foreground="White" />
+                        </Button>
+                    </ListBoxItem>
+                    <ListBoxItem VerticalAlignment="Center">
+                        <Button
+                            Name="SteamButton"
+                            Style="{StaticResource ResourceKey=ServiceButton}"
+                            ToolTip="{x:Static pipeworks:Strings.Steam}"
+                            Click="GetDescription">
+                            <materialDesign:PackIcon Kind="Steam" Width="20" Height="20" Foreground="White" />
+                        </Button>
+                    </ListBoxItem>
+                    <ListBoxItem VerticalAlignment="Center">
+                        <Button
+                            Name="JsonButton"
+                            Style="{StaticResource ResourceKey=ServiceButton}"
+                            ToolTip="{x:Static pipeworks:Strings.Json}"
+                            Click="GetJson">
+                            <materialDesign:PackIcon Kind="CodeJson" Width="20" Height="20" Foreground="White" />
+                        </Button>
+                    </ListBoxItem>
+                    <ListBoxItem VerticalAlignment="Center">
                         <Border
-                            DockPanel.Dock="Top"
-                            Background="#2f3947"
-                            VerticalAlignment="Top"
-                            HorizontalAlignment="Center"
-                            Margin="5,2,3,0"
-                            Padding="5,5,5,5"
-                            CornerRadius="5"
-                        >
+                            Background="#2b3558"
+                            Width="45"
+                            Height="20"
+                            CornerRadius="4">
                             <TextBlock
-                                x:Name="RightDescription"
                                 VerticalAlignment="Center"
-                                HorizontalAlignment="Left"
-                                FontSize="15"
-                                FontFamily="Comic Sans MS"
-                                Foreground="#FFFFFF"
-                                TextWrapping="Wrap"
-                            >
-                            </TextBlock>                    
+                                TextAlignment="Center"
+                                FontWeight="Bold"
+                                FontFamily="Arial"
+                                Foreground="#ffffff"
+                                Name="HoursSpent"
+                                Text="0" />
                         </Border>
-                        <Border
-                            DockPanel.Dock="Bottom"
-                            Background="#1c232b"
-                            VerticalAlignment="Bottom"
-                            HorizontalAlignment="Center"
-                            Margin="0,0,0,5"
-                            Padding="0,0,0,0"
-                            CornerRadius="2"
-                        >
-                            <TextBlock
-                                x:Name="RightInfo"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                FontSize="10"
-                                FontFamily="Comic Sans MS"
-                                Foreground="#FFFFFF"
-                            >
-                            </TextBlock>
-                    </Border>
+                    </ListBoxItem>
+                </StackPanel>
+            </DockPanel>
+
+            <DockPanel Grid.Row="1" Background="#415063">
+                <Border
+                    DockPanel.Dock="Top"
+                    Background="#212832"
+                    CornerRadius="10"
+                    Margin="5,10,5,5"
+                    Padding="10,5,10,10"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center">
+                    <TextBlock
+                        x:Name="RightTitle"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        FontSize="32"
+                        FontFamily="Comic Sans MS"
+                        Foreground="#FFFFFF" />
+                </Border>
+                <Border
+                    DockPanel.Dock="Top"
+                    Background="#2f3947"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    Margin="5,2,3,0"
+                    Padding="5,5,5,5"
+                    CornerRadius="5">
+                    <TextBlock
+                        x:Name="RightDescription"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        FontSize="15"
+                        FontFamily="Comic Sans MS"
+                        Foreground="#FFFFFF"
+                        TextWrapping="Wrap" />
+                </Border>
+                <Border
+                    DockPanel.Dock="Bottom"
+                    Background="#1c232b"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,5"
+                    Padding="0,0,0,0"
+                    CornerRadius="2">
+                    <TextBlock
+                        x:Name="RightInfo"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        FontSize="10"
+                        FontFamily="Comic Sans MS"
+                        Foreground="#FFFFFF" />
+                </Border>
             </DockPanel>
         </Grid>
     </Grid>

@@ -21,21 +21,21 @@ namespace pipeworks.localisations {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Strings_en {
+    internal class Strings_en {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public Strings_en() {
+        internal Strings_en() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("pipeworks.localisations.Strings.en", typeof(Strings_en).Assembly);
@@ -50,7 +50,7 @@ namespace pipeworks.localisations {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -62,7 +62,7 @@ namespace pipeworks.localisations {
         /// <summary>
         ///   Looks up a localized string similar to Add app to list.
         /// </summary>
-        public static string AddButton {
+        internal static string AddButton {
             get {
                 return ResourceManager.GetString("AddButton", resourceCulture);
             }
@@ -71,7 +71,7 @@ namespace pipeworks.localisations {
         /// <summary>
         ///   Looks up a localized string similar to Open local directory.
         /// </summary>
-        public static string BrowseApp {
+        internal static string BrowseApp {
             get {
                 return ResourceManager.GetString("BrowseApp", resourceCulture);
             }
@@ -80,7 +80,7 @@ namespace pipeworks.localisations {
         /// <summary>
         ///   Looks up a localized string similar to Delete app from list.
         /// </summary>
-        public static string DeleteButton {
+        internal static string DeleteButton {
             get {
                 return ResourceManager.GetString("DeleteButton", resourceCulture);
             }
@@ -89,7 +89,7 @@ namespace pipeworks.localisations {
         /// <summary>
         ///   Looks up a localized string similar to Already in list, skipping :).
         /// </summary>
-        public static string DuplicateDesc {
+        internal static string DuplicateDesc {
             get {
                 return ResourceManager.GetString("DuplicateDesc", resourceCulture);
             }
@@ -98,7 +98,7 @@ namespace pipeworks.localisations {
         /// <summary>
         ///   Looks up a localized string similar to Duplicate.
         /// </summary>
-        public static string DuplicateTitle {
+        internal static string DuplicateTitle {
             get {
                 return ResourceManager.GetString("DuplicateTitle", resourceCulture);
             }
@@ -107,16 +107,25 @@ namespace pipeworks.localisations {
         /// <summary>
         ///   Looks up a localized string similar to Change app settings.
         /// </summary>
-        public static string EditApp {
+        internal static string EditApp {
             get {
                 return ResourceManager.GetString("EditApp", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View .json (settings) of app.
+        /// </summary>
+        internal static string Json {
+            get {
+                return ResourceManager.GetString("Json", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Launch app.
         /// </summary>
-        public static string PlayApp {
+        internal static string PlayApp {
             get {
                 return ResourceManager.GetString("PlayApp", resourceCulture);
             }
@@ -125,7 +134,7 @@ namespace pipeworks.localisations {
         /// <summary>
         ///   Looks up a localized string similar to Reload list.
         /// </summary>
-        public static string ReloadButton {
+        internal static string ReloadButton {
             get {
                 return ResourceManager.GetString("ReloadButton", resourceCulture);
             }
@@ -134,7 +143,7 @@ namespace pipeworks.localisations {
         /// <summary>
         ///   Looks up a localized string similar to Load description from Steam (It doesn&apos;t always work).
         /// </summary>
-        public static string Steam {
+        internal static string Steam {
             get {
                 return ResourceManager.GetString("Steam", resourceCulture);
             }
