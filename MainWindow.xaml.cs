@@ -20,58 +20,31 @@ public partial class MainWindow : Window
     private readonly string appDataPath;
     public Game currentGame;
     public List<Game> games = new();
-    private readonly string jsonPath;
+    private readonly StorageHandler storage;
 
     public MainWindow()
     {
+        storage = new StorageHandler();
+        
         appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "pipeworks");
-        jsonPath = Path.Combine(appDataPath, "games.json");
         if (!Directory.Exists(appDataPath)) Directory.CreateDirectory(appDataPath);
         InitializeComponent();
-        LoadGames();
+        storage.LoadGames();
         DataContext = currentGame; // иди просто нахуй как ты работаешь я не понимаю блятьт
     }
 
-    private void LoadGames()
-    {
-        if (File.Exists(jsonPath))
-        {
-            var json = File.ReadAllText(jsonPath);
-            games = JsonSerializer.Deserialize<List<Game>>(json) ?? new List<Game>();
-        }
-        else
-        {
-            games = new List<Game>();
-            SaveGames();
-        }
-
-        GameList.ItemsSource = null;
-        GameList.ItemsSource = games;
-    }
-
-    // private string ResolveShortCut(string shortcutPath) // тупые блять микрософты вы не могли сделать так, чтобы оно сразу возвращало путь к оригиналу нахуя мне эту функцию делать
-    // {
-    //     if (!File.Exists(shortcutPath) || Path.GetExtension(shortcutPath).ToLower() != ".lnk")
-    //         return shortcutPath;
-    //
-    //     Type shellType = Type.GetTypeFromProgID("WScript.Shell");
-    //     dynamic shell = Activator.CreateInstance(shellType);
-    //     dynamic shortcut = shell.CreateShortcut(shortcutPath);
-    //
-    //     return shortcut.TargetPath;
-    // }
-
-    private void SaveGames()
-    {
-        var json = JsonSerializer.Serialize(games, new JsonSerializerOptions { WriteIndented = true });
-        File.WriteAllText(jsonPath, json);
-    }
-
+    
     private void SecretButton(object sender, RoutedEventArgs e)
     {
         MessageBox.Show("ᗜ˰ᗜ", "ᗜ˰ᗜ");
     }
 
+    private void LoadGames()
+    {
+        games = storage.LoadGames();
+        GameList.ItemsSource = null;
+        GameList.ItemsSource = games;
+    }
     private void Refresh(object sender, RoutedEventArgs e)
     {
         Reload();
@@ -79,18 +52,16 @@ public partial class MainWindow : Window
 
     private void Reload()
     {
-        SaveGames();
         LoadGames();
     }
 
     private void DeleteGame(object sender, RoutedEventArgs e)
     {
-        if (GameList.SelectedItem == null) return;
-        if (GameList.SelectedItem is Game game)
-        {
-            games.Remove(game);
-            Reload();
-        }
+        if (GameList.SelectedItem is not Game game) return;
+        
+        games.Remove(game);
+        storage.DeleteGame(game);
+        LoadGames();
     }
 
     private void AddGame(object sender, RoutedEventArgs e)
@@ -111,24 +82,21 @@ public partial class MainWindow : Window
         }
 
         var fileName = Path.GetFileNameWithoutExtension(filePath);
-        var name = fileName; // на случай если нет названия
+        var name = fileName;
         var versionInfo = FileVersionInfo.GetVersionInfo(filePath);
-        Console.WriteLine(versionInfo.FileDescription);
         if (!string.IsNullOrWhiteSpace(versionInfo.FileDescription))
             name = versionInfo.FileDescription;
-        else if (name == fileName)
-            name = "";
 
         var newGame = new Game
         {
             Name = fileName,
             DisplayName = name,
             ExecutablePath = filePath,
-            Playtime = "0 ч."
+            Playtime = "0"
         };
 
         games.Add(newGame);
-        SaveGames();
+        storage.SaveGame(newGame);
         LoadGames();
     }
 
@@ -136,10 +104,10 @@ public partial class MainWindow : Window
     {
         currentGame = (Game)GameList.SelectedItem;
         if (currentGame == null) return;
-        var path = currentGame.ExecutablePath;
+
         var psi = new ProcessStartInfo
         {
-            FileName = $@"{path}",
+            FileName = currentGame.ExecutablePath,
             UseShellExecute = true
         };
         Process.Start(psi);
@@ -149,8 +117,9 @@ public partial class MainWindow : Window
     {
         currentGame = (Game)GameList.SelectedItem;
         if (currentGame == null) return;
+
         var folder = Path.GetDirectoryName(currentGame.ExecutablePath);
-        Process.Start("explorer.exe", $@"{folder}");
+        Process.Start("explorer.exe", folder);
     }
 
     private void GameClicked(object sender, MouseButtonEventArgs e)
@@ -169,18 +138,19 @@ public partial class MainWindow : Window
         currentGame = (Game)GameList.SelectedItem;
         if (currentGame == null) return;
 
-        var button = sender as Button;
-        if (currentGame != null)
+        var editWindow = new EditWindow(currentGame);
+        editWindow.Owner = this;
+
+        if (editWindow.ShowDialog() == true)
         {
-            var editWindow = new EditWindow(currentGame);
-            editWindow.Owner = this;
-            editWindow.ShowDialog();
-            GameList.Items.Refresh();
+            storage.SaveGame(currentGame);
+            LoadGames();
         }
     }
 
     private void GetDescription(object sender, RoutedEventArgs e)
     {
+        // todo
         throw new NotImplementedException();
     }
 
