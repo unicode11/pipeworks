@@ -7,13 +7,13 @@
         Background="#1a2028"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:pipeworks.app"
+        xmlns:pipeworks="clr-namespace:pipeworks"
         Title="pipeworks" Height="600" Width="649">
     <Window.Resources>
         <!-- common button -->
         <Style x:Key="ServiceButton" TargetType="Button">
             <Setter Property="Width" Value="20"/>
             <Setter Property="Height" Value="20"/>
-            <Setter Property="Margin" Value="0"/>
             <Setter Property="ToolTipService.ShowDuration" Value="3000"/>
             <Setter Property="Background" Value="#2a3657"/>
             <Setter Property="Foreground" Value="White"/>
@@ -76,21 +76,21 @@
                     <ListBoxItem><Button
                         Name="ButtonPlus"
                         Style="{StaticResource ResourceKey=ServiceButton}"
-                        ToolTip="Add new instance"
+                        ToolTip="{x:Static pipeworks:Strings.AddButton }"
                         Click="AddGame">
                         <materialDesign:PackIcon Kind="Plus" Width="20" Height="20" Foreground="White"/>
                     </Button></ListBoxItem>
                     <ListBoxItem><Button
                         Name="ButtonMinus"
                         Style="{StaticResource ResourceKey=ServiceButton}"
-                        ToolTip="Delete instance from list"
+                        ToolTip="{x:Static pipeworks:Strings.DeleteButton}"
                         Click="DeleteGame">
                         <materialDesign:PackIcon Kind="Minus" Width="20" Height="20" Foreground="White"/>
                     </Button></ListBoxItem>
                     <ListBoxItem><Button
                         Name="ButtonReload"
                         Style="{StaticResource ResourceKey=ServiceButton}"
-                        ToolTip="Refresh list"
+                        ToolTip="{x:Static pipeworks:Strings.ReloadButton}"
                         Click="Refresh">
                         <materialDesign:PackIcon Kind="Reload" Width="20" Height="20" Foreground="White"/>
                     </Button></ListBoxItem>
@@ -101,13 +101,21 @@
                         Click="SecretButton">
                         <materialDesign:PackIcon Kind="NumericNine" Width="20" Height="20" Foreground="White"/>
                     </Button></ListBoxItem>
+                    <ListBoxItem><Button
+                        Name="ButtonLangugage"
+                        Style="{StaticResource ResourceKey=ServiceButton}"
+                        ToolTip="Changes language/Смена языка"
+                        Click="ChangeLanguage">
+                        <materialDesign:PackIcon Kind="SpokenLanguage" Width="20" Height="20" Foreground="White"/>
+                    </Button></ListBoxItem>
                 </ListBox>
                 
                 <ScrollViewer Grid.Row="1" >
                     <ListBox 
                         x:Name="GameList"
                         Background="#374455"
-                        BorderThickness="0">
+                        BorderThickness="0"
+                        MouseDoubleClick="GameClicked">
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="{x:Type local:Game}">
                                 <Border Margin="0 5" Padding="10"
@@ -155,7 +163,7 @@
                                 Name="PlayButton"
                                 Style="{StaticResource ResourceKey=ServiceButton}"
                                 Width="150"
-                                ToolTip="Launch app executable"
+                                ToolTip="{x:Static pipeworks:Strings.PlayApp}"
                                 Click="PlayGame">
                                 <materialDesign:PackIcon Kind="Play" Width="20" Height="20" Foreground="White"/>
                             </Button>
@@ -164,7 +172,7 @@
                                 <Button
                                 Name="BrowseLocalFiles"
                                 Style="{StaticResource ResourceKey=ServiceButton}"
-                                ToolTip="Browse local files"
+                                ToolTip="{x:Static pipeworks:Strings.BrowseApp}"
                                 Click="BrowseFiles">
                                 <materialDesign:PackIcon Kind="Folder" Width="20" Height="20" Foreground="White"/>
                             </Button>
@@ -173,10 +181,36 @@
                                 <Button
                                 Name="EditButton"
                                 Style="{StaticResource ResourceKey=ServiceButton}"
-                                ToolTip="Edit instance"
-                                Click="BrowseFiles">
+                                ToolTip="{x:Static pipeworks:Strings.EditApp}"
+                                Click="EditInstance">
                                 <materialDesign:PackIcon Kind="Pencil" Width="20" Height="20" Foreground="White"/>
                             </Button>
+                            </ListBoxItem>
+                            <ListBoxItem VerticalAlignment="Center">
+                                <Button
+                                    Name="SteamButton"
+                                    Style="{StaticResource ResourceKey=ServiceButton}"
+                                    ToolTip="{x:Static pipeworks:Strings.Steam}"
+                                    Click="GetDescription">
+                                    <materialDesign:PackIcon Kind="Steam" Width="20" Height="20" Foreground="White"/>
+                                </Button>
+                            </ListBoxItem>
+                            <ListBoxItem VerticalAlignment="Center">
+                                <Border
+                                    Background="#2b3558"
+                                    Width="45"
+                                    Height="20"
+                                    CornerRadius="4">
+                                    <TextBlock
+                                        VerticalAlignment="Center"
+                                        TextAlignment="Center"
+                                        FontWeight="Bold"
+                                        FontFamily="Arial"
+                                        Foreground="#ffffff"
+                                        Name="HoursSpent"
+                                        Text="0">
+                                    </TextBlock>
+                                </Border>
                             </ListBoxItem>  
                         </StackPanel>
                     </DockPanel>
@@ -192,12 +226,12 @@
                             HorizontalAlignment="Center"
                         >
                             <TextBlock
+                                x:Name="RightTitle"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 FontSize="32"
                                 FontFamily="Comic Sans MS"
                                 Foreground="#FFFFFF"
-                                Text="xui"
                             >
                             </TextBlock>
                         </Border>
@@ -211,6 +245,7 @@
                             CornerRadius="5"
                         >
                             <TextBlock
+                                x:Name="RightDescription"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Left"
                                 FontSize="15"
@@ -218,12 +253,6 @@
                                 Foreground="#FFFFFF"
                                 TextWrapping="Wrap"
                             >
-                                Обычный текст
-                                Компонент-текст позволяет добавлять текст на страницу и форматировать его с помощью стилей, заданных в теме. Панель инструментов форматирования недоступна при редактировании содержимого, поэтому невозможно перезаписать выбранный стиль пользовательским форматированием.
-
-                                Это полезно, если используется стандартное форматирование для таких элементов, как заголовки. Можно обновить стили, определенные в теме, и автоматически обновить связанный текст на сайте без перезаписи формата.
-
-                                Добавление компонента-текста:
                             </TextBlock>                    
                         </Border>
                         <Border
@@ -236,11 +265,11 @@
                             CornerRadius="2"
                         >
                             <TextBlock
+                                x:Name="RightInfo"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 FontSize="10"
                                 FontFamily="Comic Sans MS"
-                                Text="idi nakhui"
                                 Foreground="#FFFFFF"
                             >
                             </TextBlock>

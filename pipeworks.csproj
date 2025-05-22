@@ -22,5 +22,38 @@
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="5.2.2-ci998" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Page Update="EditWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Update="translate\Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="localisations\Strings.en.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Update="translate\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+      <AccessModifier>Public</AccessModifier>
+    </Compile>
+    <Compile Update="localisations\Strings.en.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.en.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
 
 </Project>
